@@ -203,7 +203,23 @@
 
     </LinearLayout>
 
-    
+    <FrameLayout
+        android:id="@+id/viewPagerLayout"
+        android:background="#a3c1c5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/midDataLayout"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.emrekose.weatherapp.fragments.MainActivityFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_main">
+
+    </fragment>
+    </FrameLayout>
 
 
 </RelativeLayout>
