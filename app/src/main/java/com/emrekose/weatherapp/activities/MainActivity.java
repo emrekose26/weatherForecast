@@ -10,7 +10,7 @@ import com.emrekose.weatherapp.utils.Font;
 public class MainActivity extends AppCompatActivity {
 
     private TextView cityTexView, countryTextView, degreeTextView, weatherDescriptionTexView,
-    timeTextView, dateTextView;
+    timeTextView, dateTextView, maxMinTemperatureTexView, humidityTextView, windTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
         weatherDescriptionTexView = (TextView)findViewById(R.id.weatherDescTextView);
         timeTextView = (TextView)findViewById(R.id.timeTextView);
         dateTextView = (TextView)findViewById(R.id.dateTextView);
+        maxMinTemperatureTexView = (TextView)findViewById(R.id.maxMinTemperatureTexView);
+        humidityTextView = (TextView)findViewById(R.id.humidityTextView);
+        windTextView = (TextView)findViewById(R.id.windTextView);
 
         // all of textView is font changing
         Font.change(MainActivity.this,cityTexView, Font.OPEN_SANS_COND_BOLD_PATH);
@@ -38,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         Font.change(MainActivity.this,degreeTextView,Font.OPEN_SANS_COND_LIGHT_PATH);
         Font.change(MainActivity.this,timeTextView,Font.OPEN_SANS_COND_LIGHT_ITALIC_PATH);
         Font.change(MainActivity.this,dateTextView,Font.OPEN_SANS_COND_LIGHT_ITALIC_PATH);
+        Font.change(MainActivity.this,maxMinTemperatureTexView,Font.OPEN_SANS_COND_LIGHT_PATH);
+        Font.change(MainActivity.this,humidityTextView,Font.OPEN_SANS_COND_LIGHT_PATH);
+        Font.change(MainActivity.this,windTextView,Font.OPEN_SANS_COND_LIGHT_PATH);
 
     }
 }
