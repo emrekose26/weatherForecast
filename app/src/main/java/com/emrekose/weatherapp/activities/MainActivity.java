@@ -2,10 +2,15 @@ package com.emrekose.weatherapp.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.emrekose.weatherapp.R;
 import com.emrekose.weatherapp.utils.Font;
+import com.emrekose.weatherapp.utils.JSONUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initialize();
-
 
     }
 
