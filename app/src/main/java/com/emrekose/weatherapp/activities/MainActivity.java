@@ -4,15 +4,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.emrekose.weatherapp.R;
+import com.emrekose.weatherapp.model.Sys;
+import com.emrekose.weatherapp.model.WeatherResponse;
+import com.emrekose.weatherapp.rest.ApiClient;
+import com.emrekose.weatherapp.rest.ApiInterface;
+import com.emrekose.weatherapp.utils.Constants;
 import com.emrekose.weatherapp.utils.Font;
-import com.emrekose.weatherapp.utils.JSONUtils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private TextView cityTexView, countryTextView, degreeTextView, weatherDescriptionTexView,
     timeTextView, dateTextView, maxMinTemperatureTexView, humidityTextView, windTextView;
@@ -23,6 +33,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initialize();
+
+        if(Constants.API_KEY.isEmpty()){
+            Toast.makeText(MainActivity.this, "Please obtain your API KEY first from themoviedb.org", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<WeatherResponse> call = apiService.getCurrentDatas("eskisehir",Constants.API_KEY);
+        call.enqueue(new Callback<WeatherResponse>() {
+            @Override
+            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+                cityTexView.setText(response.body().getName());
+                countryTextView.setText(response.body().getSys().getCountry());
+            }
+
+            @Override
+            public void onFailure(Call<WeatherResponse> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.toString() );
+            }
+        });
 
     }
 
