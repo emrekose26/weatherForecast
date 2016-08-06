@@ -7,13 +7,13 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Clouds {
     @SerializedName("all")
-    private Double all;
+    private Integer all;
 
-    public Double getAll() {
+    public Integer getAll() {
         return all;
     }
 
-    public void setAll(Double all) {
+    public void setAll(Integer all) {
         this.all = all;
     }
 }

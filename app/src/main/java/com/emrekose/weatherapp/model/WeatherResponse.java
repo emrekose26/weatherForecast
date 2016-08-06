@@ -7,10 +7,11 @@ import java.util.List;
 /**
  * Created by emrekose on 5.08.2016.
  */
+
 public class WeatherResponse {
 
     @SerializedName("coord")
-    private List<Coord> coordList;
+    private Coord coord;
 
     @SerializedName("weather")
     private List<Weather> weatherList;
@@ -19,22 +20,22 @@ public class WeatherResponse {
     private String base;
 
     @SerializedName("main")
-    private List<MainModel> mainModelList;
+    private MainModel mainModel;
 
     @SerializedName("wind")
-    private List<Wind> windList;
+    private Wind wind;
 
     @SerializedName("rain")
-    private List<Rain> rainList;
+    private Rain rain;
 
     @SerializedName("clouds")
-    private List<Clouds> cloudsList;
+    private Clouds clouds;
 
     @SerializedName("dt")
     private int dt;
 
     @SerializedName("sys")
-    private List<Sys> sysList;
+    private Sys sys;
 
     @SerializedName("id")
     private int id;
@@ -45,12 +46,12 @@ public class WeatherResponse {
     @SerializedName("cod")
     private int cod;
 
-    public List<Coord> getCoordList() {
-        return coordList;
+    public Coord getCoord() {
+        return coord;
     }
 
-    public void setCoordList(List<Coord> coordList) {
-        this.coordList = coordList;
+    public void setCoord(Coord coord) {
+        this.coord = coord;
     }
 
     public List<Weather> getWeatherList() {
@@ -69,36 +70,36 @@ public class WeatherResponse {
         this.base = base;
     }
 
-    public List<MainModel> getMainModelList() {
-        return mainModelList;
+    public MainModel getMainModel() {
+        return mainModel;
     }
 
-    public void setMainModelList(List<MainModel> mainModelList) {
-        this.mainModelList = mainModelList;
+    public void setMainModel(MainModel mainModel) {
+        this.mainModel = mainModel;
     }
 
-    public List<Wind> getWindList() {
-        return windList;
+    public Wind getWind() {
+        return wind;
     }
 
-    public void setWindList(List<Wind> windList) {
-        this.windList = windList;
+    public void setWind(Wind wind) {
+        this.wind = wind;
     }
 
-    public List<Rain> getRainList() {
-        return rainList;
+    public Rain getRain() {
+        return rain;
     }
 
-    public void setRainList(List<Rain> rainList) {
-        this.rainList = rainList;
+    public void setRain(Rain rain) {
+        this.rain = rain;
     }
 
-    public List<Clouds> getCloudsList() {
-        return cloudsList;
+    public Clouds getClouds() {
+        return clouds;
     }
 
-    public void setCloudsList(List<Clouds> cloudsList) {
-        this.cloudsList = cloudsList;
+    public void setClouds(Clouds clouds) {
+        this.clouds = clouds;
     }
 
     public int getDt() {
@@ -109,12 +110,12 @@ public class WeatherResponse {
         this.dt = dt;
     }
 
-    public List<Sys> getSysList() {
-        return sysList;
+    public Sys getSys() {
+        return sys;
     }
 
-    public void setSysList(List<Sys> sysList) {
-        this.sysList = sysList;
+    public void setSys(Sys sys) {
+        this.sys = sys;
     }
 
     public int getId() {
