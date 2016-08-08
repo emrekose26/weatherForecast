@@ -12,8 +12,11 @@ import retrofit2.http.Query;
 
 public interface ApiInterface {
     @GET("weather")
-    Call<WeatherResponse> getCurrentDatas(@Query("q") String city, @Query("appid") String apiKey);
+    Call <WeatherResponse> getCurrentDatas(@Query("q") String city, @Query("appid") String apiKey);
+
+    @GET("weather")
+    Call <WeatherResponse> getCurrentDatasWithLocation(@Query("lat") Double lat, @Query("lon") Double lon, @Query("appid") String apiKey);
 
     @GET("forecast")
-    Call<WeatherResponse> getFiveDaysDatas(@Query("q") String city, @Query("appid") String apiKey);
+    Call <WeatherResponse> getFiveDaysDatas(@Query("q") String city, @Query("appid") String apiKey);
 }
