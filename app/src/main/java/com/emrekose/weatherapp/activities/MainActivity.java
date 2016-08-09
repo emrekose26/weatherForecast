@@ -14,6 +14,7 @@ import com.emrekose.weatherapp.model.WeatherResponse;
 import com.emrekose.weatherapp.rest.ApiClient;
 import com.emrekose.weatherapp.rest.ApiInterface;
 import com.emrekose.weatherapp.utils.Constants;
+import com.emrekose.weatherapp.utils.DateUtils;
 import com.emrekose.weatherapp.utils.Font;
 import com.emrekose.weatherapp.utils.SharedPrefUtils;
 import com.emrekose.weatherapp.utils.WeatherCalc;
