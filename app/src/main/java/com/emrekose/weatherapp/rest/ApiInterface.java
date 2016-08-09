@@ -1,5 +1,6 @@
 package com.emrekose.weatherapp.rest;
 
+import com.emrekose.weatherapp.model.ForecastResponse;
 import com.emrekose.weatherapp.model.WeatherResponse;
 
 import retrofit2.Call;
@@ -18,5 +19,5 @@ public interface ApiInterface {
     Call <WeatherResponse> getCurrentDatasWithLocation(@Query("lat") Double lat, @Query("lon") Double lon, @Query("appid") String apiKey);
 
     @GET("forecast")
-    Call <WeatherResponse> getFiveDaysDatas(@Query("q") String city, @Query("appid") String apiKey);
+    Call <ForecastResponse> getFiveDaysDatas(@Query("q") String city, @Query("appid") String apiKey);
 }
