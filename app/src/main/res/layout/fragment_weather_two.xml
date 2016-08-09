@@ -4,10 +4,97 @@
     android:layout_height="match_parent"
     tools:context="com.emrekose.weatherapp.fragments.WeatherTwoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Two Fragment" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/dayThreeTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="WED"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="26dp" />
+
+                <ImageView
+                    android:id="@+id/fragment3ImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cloudy19" />
+
+                <TextView
+                    android:id="@+id/tempFragmentTextView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="58"
+                    android:textColor="@android:color/white"
+                    android:textSize="30dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/dayFourTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="THU"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="26dp" />
+
+                <ImageView
+                    android:id="@+id/fragment4ImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cloudy19" />
+
+                <TextView
+                    android:id="@+id/tempFragmentTextView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="52"
+                    android:textColor="@android:color/white"
+                    android:textSize="30dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </FrameLayout>

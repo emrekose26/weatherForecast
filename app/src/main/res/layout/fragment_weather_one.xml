@@ -5,9 +5,9 @@
     tools:context="com.emrekose.weatherapp.fragments.WeatherOneFragment">
 
     <LinearLayout
-        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:weightSum="100">
 
@@ -24,23 +24,30 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/dayOneTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="WED"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
                     android:textSize="26dp" />
 
                 <ImageView
+                    android:id="@+id/fragment1ImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/cloudy19" />
+                    android:src="@drawable/fdayzeroone" />
 
                 <TextView
-                    android:layout_marginTop="10dp"
+                    android:id="@+id/tempFragmentTextView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="72 / 58"
-                    android:textSize="20dp" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="58"
+                    android:textColor="@android:color/white"
+                    android:textSize="30dp" />
 
             </LinearLayout>
 
@@ -59,23 +66,30 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/dayTwoTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="THU"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
                     android:textSize="26dp" />
 
                 <ImageView
+                    android:id="@+id/fragment2ImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/cloudy19" />
+                    android:src="@drawable/fdayzerotwo" />
 
                 <TextView
-                    android:layout_marginTop="10dp"
+                    android:id="@+id/tempFragmentTextView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="65 / 52"
-                    android:textSize="20dp" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="52"
+                    android:textColor="@android:color/white"
+                    android:textSize="30dp" />
 
             </LinearLayout>
 
