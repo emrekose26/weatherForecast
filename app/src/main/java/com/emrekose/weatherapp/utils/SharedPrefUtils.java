@@ -22,4 +22,17 @@ public class SharedPrefUtils {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getInt("gps",-1);
     }
+
+    public static void setCityName(Context context, String cityName){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putString("cityname",cityName);
+        editor.commit();
+    }
+
+    public static String getCityName(Context context){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString("cityname","");
+    }
 }

@@ -55,62 +55,34 @@ public class MainActivity extends AppCompatActivity {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
 
-        if(SharedPrefUtils.getGPSCondition(this) == 1){
-            Call <WeatherResponse> call = apiService.getCurrentDatasWithLocation(weatherLocation.getLat(),weatherLocation.getLon(),Constants.API_KEY);
-            call.enqueue(new Callback<WeatherResponse>() {
-                @Override
-                public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
-                    cityTexView.setText(response.body().getName());
-                    countryTextView.setText(response.body().getSys().getCountry());
-                    degreeTextView.setText(WeatherCalc.kelvinToCelcius(response.body().getMainModel().getTemp()));
-                    weatherDescriptionTexView.setText(response.body().getWeatherList().get(0).getMain());
-                    humidityTextView.setText(" % " + String.valueOf(response.body().getMainModel().getHumidity()));
-                    windTextView.setText(String.valueOf(Math.floor(response.body().getWind().getDeg())) + " m/s");
-                    maxMinTemperatureTexView.setText(WeatherCalc.kelvinToCelcius(response.body().getMainModel().getTempMax()) + " / " + WeatherCalc.kelvinToCelcius(response.body().getMainModel().getTempMin()));
+        Call <WeatherResponse> call = apiService.getCurrentDatas(SharedPrefUtils.getCityName(MainActivity.this),Constants.API_KEY);
+        call.enqueue(new Callback<WeatherResponse>() {
+            @Override
+            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+                cityTexView.setText(response.body().getName());
+                countryTextView.setText(response.body().getSys().getCountry());
+                degreeTextView.setText(WeatherCalc.kelvinToCelcius(response.body().getMainModel().getTemp()));
+                weatherDescriptionTexView.setText(response.body().getWeatherList().get(0).getMain());
+                humidityTextView.setText(" % " + String.valueOf(response.body().getMainModel().getHumidity()));
+                windTextView.setText(String.valueOf(Math.floor(response.body().getWind().getDeg())) + " m/s");
+                maxMinTemperatureTexView.setText(WeatherCalc.kelvinToCelcius(response.body().getMainModel().getTempMax()) + " / " + WeatherCalc.kelvinToCelcius(response.body().getMainModel().getTempMin()));
 
-                    SimpleDateFormat time = new SimpleDateFormat("HH.mm a / EEE"); // 08.45 PM / Thu
-                    timeTextView.setText(time.format(new Date()));
+                SimpleDateFormat time = new SimpleDateFormat("HH.mm a / EEE"); // 08.45 PM / Thu
+                timeTextView.setText(time.format(new Date()));
 
-                    SimpleDateFormat date = new SimpleDateFormat("dd MMM yyyy"); // 06 Ağu 2016
-                    dateTextView.setText(date.format(new Date()));
+                SimpleDateFormat date = new SimpleDateFormat("dd MMM yyyy"); // 06 Ağu 2016
+                dateTextView.setText(date.format(new Date()));
 
-                    WeatherUtils.setWeatherIcon(weatherIconImageView,response.body().getWeatherList().get(0).getIcon());
-                }
+                WeatherUtils.setWeatherIcon(weatherIconImageView,response.body().getWeatherList().get(0).getIcon());
+            }
 
-                @Override
-                public void onFailure(Call<WeatherResponse> call, Throwable t) {
-                    Log.e(TAG, "onFailure: " + t.toString() );
-                }
-            });
+            @Override
+            public void onFailure(Call<WeatherResponse> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.toString() );
+            }
+        });
 
-        }else if(SharedPrefUtils.getGPSCondition(this) == 0){
-            Call <WeatherResponse> call = apiService.getCurrentDatas("eskisehir",Constants.API_KEY);
-            call.enqueue(new Callback<WeatherResponse>() {
-                @Override
-                public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
-                    cityTexView.setText(response.body().getName());
-                    countryTextView.setText(response.body().getSys().getCountry());
-                    degreeTextView.setText(WeatherCalc.kelvinToCelcius(response.body().getMainModel().getTemp()));
-                    weatherDescriptionTexView.setText(response.body().getWeatherList().get(0).getMain());
-                    humidityTextView.setText(" % " + String.valueOf(response.body().getMainModel().getHumidity()));
-                    windTextView.setText(String.valueOf(Math.floor(response.body().getWind().getDeg())) + " m/s");
-                    maxMinTemperatureTexView.setText(WeatherCalc.kelvinToCelcius(response.body().getMainModel().getTempMax()) + " / " + WeatherCalc.kelvinToCelcius(response.body().getMainModel().getTempMin()));
 
-                    SimpleDateFormat time = new SimpleDateFormat("HH.mm a / EEE"); // 08.45 PM / Thu
-                    timeTextView.setText(time.format(new Date()));
-
-                    SimpleDateFormat date = new SimpleDateFormat("dd MMM yyyy"); // 06 Ağu 2016
-                    dateTextView.setText(date.format(new Date()));
-
-                    WeatherUtils.setWeatherIcon(weatherIconImageView,response.body().getWeatherList().get(0).getIcon());
-                }
-
-                @Override
-                public void onFailure(Call<WeatherResponse> call, Throwable t) {
-                    Log.e(TAG, "onFailure: " + t.toString() );
-                }
-            });
-        }
 
     }
 
@@ -132,9 +104,11 @@ public class MainActivity extends AppCompatActivity {
         weatherIconImageView = (ImageView)findViewById(R.id.weatherIconImageView);
 
         // location config
+        /*
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,2000,10,new WeatherLocation(this));
         weatherLocation = new WeatherLocation(this);
+        */
 
         // all of textView is font changing
         Font.change(MainActivity.this,cityTexView, Font.OPEN_SANS_COND_BOLD_PATH);
