@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.emrekose.weatherapp.fragments.WeatherOneFragment;
-import com.emrekose.weatherapp.fragments.WeatherThreeFragment;
 import com.emrekose.weatherapp.fragments.WeatherTwoFragment;
 
 /**
@@ -16,7 +15,7 @@ import com.emrekose.weatherapp.fragments.WeatherTwoFragment;
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private Context context;
-    public static int total_page = 3;
+    public static int total_page = 2;
 
     public ViewPagerAdapter(Context context,FragmentManager fm) {
         super(fm);
@@ -33,9 +32,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
                 break;
             case 1 :
                 fragment = new WeatherTwoFragment();
-                break;
-            case 2 :
-                fragment = new WeatherThreeFragment();
                 break;
         }
 

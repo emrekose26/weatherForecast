@@ -20,7 +20,7 @@ public class MainActivityFragment extends Fragment {
 
     private ViewPager mViewPager;
     private ViewPagerAdapter mAdapter;
-    private ImageView indicator1, indicator2, indicator3;
+    private ImageView indicator1, indicator2;
 
     public MainActivityFragment() {}
 
@@ -49,13 +49,7 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
-        indicator3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                indicator3.setImageResource(R.drawable.fill_circle);
-                mViewPager.setCurrentItem(2);
-            }
-        });
+
     }
 
     @Nullable
@@ -75,7 +69,6 @@ public class MainActivityFragment extends Fragment {
             public void onPageSelected(int position) {
                 indicator1.setImageResource(R.drawable.holo_circle);
                 indicator2.setImageResource(R.drawable.holo_circle);
-                indicator3.setImageResource(R.drawable.holo_circle);
                 indicatorAction(position);
             }
 
@@ -94,9 +87,6 @@ public class MainActivityFragment extends Fragment {
             case 1:
                 indicator2.setImageResource(R.drawable.fill_circle);
                 break;
-            case 2:
-                indicator3.setImageResource(R.drawable.fill_circle);
-                break;
         }
     }
 
@@ -111,7 +101,6 @@ public class MainActivityFragment extends Fragment {
     private void initButton() {
         indicator1 = (ImageView)getView().findViewById(R.id.indicator1);
         indicator2 = (ImageView)getView().findViewById(R.id.indicator2);
-        indicator3 = (ImageView)getView().findViewById(R.id.indicator3);
 
         indicator1.setImageResource(R.drawable.fill_circle);
     }
