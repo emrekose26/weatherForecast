@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.emrekose.weatherapp"
-        minSdkVersion 10
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -29,5 +29,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
-    
+
+    // float action button
+    compile 'com.getbase:floatingactionbutton:1.10.1'
 }

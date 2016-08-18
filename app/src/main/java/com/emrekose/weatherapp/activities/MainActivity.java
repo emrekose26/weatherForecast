@@ -1,10 +1,11 @@
 package com.emrekose.weatherapp.activities;
 
-import android.content.Context;
+import android.content.Intent;
 import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,12 +15,13 @@ import com.emrekose.weatherapp.model.WeatherResponse;
 import com.emrekose.weatherapp.rest.ApiClient;
 import com.emrekose.weatherapp.rest.ApiInterface;
 import com.emrekose.weatherapp.utils.Constants;
-import com.emrekose.weatherapp.utils.DateUtils;
 import com.emrekose.weatherapp.utils.Font;
 import com.emrekose.weatherapp.utils.SharedPrefUtils;
 import com.emrekose.weatherapp.utils.WeatherCalc;
 import com.emrekose.weatherapp.utils.WeatherLocation;
 import com.emrekose.weatherapp.utils.WeatherUtils;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    private final int SHOW_CITIES_ACTIVITY = 1;
+
+    private static String currentCityName;
+
     private TextView cityTexView, countryTextView, degreeTextView, weatherDescriptionTexView,
     timeTextView, dateTextView, maxMinTemperatureTexView, humidityTextView, windTextView;
 
@@ -39,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
     private LocationManager locationManager;
     private WeatherLocation weatherLocation;
+
+    private FloatingActionsMenu floatingActionsMenu;
+    private FloatingActionButton fabRefresh, fabGetGpsDatas, fabChangeCity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +91,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(!SharedPrefUtils.getCityName(MainActivity.this).isEmpty()){
+            this.finish();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (resultCode){
+            case RESULT_OK :
+                currentCityName = data.getStringExtra("cityname");
+                break;
+            case RESULT_CANCELED :
+                Toast.makeText(MainActivity.this, "Lokasyon değiştirilmedi.", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
 
     private void initialize(){
 
@@ -109,6 +137,23 @@ public class MainActivity extends AppCompatActivity {
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,2000,10,new WeatherLocation(this));
         weatherLocation = new WeatherLocation(this);
         */
+
+        // Float action buttons
+        floatingActionsMenu = (FloatingActionsMenu)findViewById(R.id.floatingActionsMenu);
+        fabRefresh = (FloatingActionButton)findViewById(R.id.fabRefresh);
+        fabGetGpsDatas = (FloatingActionButton)findViewById(R.id.fabGetGpsDatas);
+        fabChangeCity = (FloatingActionButton)findViewById(R.id.fabChangeCity);
+
+        fabChangeCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentCityName = SharedPrefUtils.getCityName(MainActivity.this);
+                Intent intent = new Intent(MainActivity.this,CitiesActivity.class);
+                intent.putExtra("changeLocation",true);
+                startActivityForResult(intent,SHOW_CITIES_ACTIVITY);
+                finish();
+            }
+        });
 
         // all of textView is font changing
         Font.change(MainActivity.this,cityTexView, Font.OPEN_SANS_COND_BOLD_PATH);

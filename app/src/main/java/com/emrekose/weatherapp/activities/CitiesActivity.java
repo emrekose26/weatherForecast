@@ -15,6 +15,10 @@ import com.emrekose.weatherapp.utils.SharedPrefUtils;
 
 public class CitiesActivity extends AppCompatActivity {
 
+    private String cityName;
+
+    private Bundle extras;
+
     private ListView listView;
     private String[] citiesList;
     private ArrayAdapter<String> adapter;
@@ -25,34 +29,60 @@ public class CitiesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cities);
 
-        if(SharedPrefUtils.getCityName(CitiesActivity.this).isEmpty()){
+        Intent intent = getIntent();
+        extras = intent.getExtras();
 
-            toolbar = (Toolbar)findViewById(R.id.citiesToolbar);
-            setSupportActionBar(toolbar);
+        if(extras != null){
+            initialize();
 
-            getSupportActionBar().setTitle("İl Seçiniz");
-
-            listView = (ListView)findViewById(R.id.citiesListView);
-
-            citiesList = getResources().getStringArray(R.array.cities);
-
-            adapter = new ArrayAdapter<String>(CitiesActivity.this,android.R.layout.simple_list_item_1,citiesList);
-
-            listView.setAdapter(adapter);
-
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    TextView textView = (TextView)view;
-                    SharedPrefUtils.setCityName(CitiesActivity.this,textView.getText().toString());
-                    startActivity(new Intent(CitiesActivity.this,MainActivity.class));
-                    finish();
-                }
-            });
-        }else {
-            startActivity(new Intent(CitiesActivity.this,MainActivity.class));
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("cityName",cityName);
+            setResult(RESULT_OK,returnIntent);
+        }else{
+            // check city name to first begin
+            if(SharedPrefUtils.getCityName(CitiesActivity.this).isEmpty()){
+                initialize();
+            }else {
+                startActivity(new Intent(CitiesActivity.this,MainActivity.class));
+                finish();
+            }
         }
 
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if(extras != null){
+            startActivity(new Intent(CitiesActivity.this,MainActivity.class));
+            finish();
+        }
+    }
+
+    private void initialize(){
+        toolbar = (Toolbar)findViewById(R.id.citiesToolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle("İl Seçiniz");
+
+        listView = (ListView)findViewById(R.id.citiesListView);
+
+        citiesList = getResources().getStringArray(R.array.cities);
+
+        adapter = new ArrayAdapter<String>(CitiesActivity.this,android.R.layout.simple_list_item_1,citiesList);
+
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView textView = (TextView)view;
+                cityName = textView.getText().toString();
+                SharedPrefUtils.setCityName(CitiesActivity.this,cityName);
+                startActivity(new Intent(CitiesActivity.this,MainActivity.class));
+                finish();
+            }
+        });
     }
 }

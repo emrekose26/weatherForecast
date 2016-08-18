@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -204,23 +205,71 @@
 
     </LinearLayout>
 
-    <FrameLayout
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/viewPagerLayout"
-        android:background="#80a3c1c5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/midDataLayout"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:background="#80a3c1c5">
 
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.emrekose.weatherapp.fragments.MainActivityFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_main">
+        <fragment
+            android:id="@+id/mainFragment"
+            android:name="com.emrekose.weatherapp.fragments.MainActivityFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_main">
 
-    </fragment>
+        </fragment>
     </FrameLayout>
 
 
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/floatingActionsMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="14dp"
+        fab:fab_addButtonColorNormal="@color/colorPrimaryDark"
+        fab:fab_addButtonSize="normal"
+        fab:fab_expandDirection="down"
+        fab:fab_icon="@drawable/settings"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        fab:fab_labelsPosition="left">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/colorPrimaryDark"
+            fab:fab_icon="@drawable/ic_refresh_white_24dp"
+            fab:fab_size="mini"
+            fab:fab_title="Yenile" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabGetGpsDatas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/colorPrimaryDark"
+            fab:fab_icon="@drawable/ic_gps_fixed_white_24dp"
+            fab:fab_size="mini"
+            fab:fab_title="GPS'den veri al" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabChangeCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/colorPrimaryDark"
+            fab:fab_icon="@drawable/ic_location_on_white_24dp"
+            fab:fab_size="mini"
+            fab:fab_title="Lokasyonu Değiştir" />
+
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
 </RelativeLayout>
+
+
+
