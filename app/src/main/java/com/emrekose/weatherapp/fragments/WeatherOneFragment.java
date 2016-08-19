@@ -15,6 +15,8 @@ import com.emrekose.weatherapp.rest.ApiClient;
 import com.emrekose.weatherapp.rest.ApiInterface;
 import com.emrekose.weatherapp.utils.Constants;
 import com.emrekose.weatherapp.utils.DateUtils;
+import com.emrekose.weatherapp.utils.Font;
+import com.emrekose.weatherapp.utils.SharedPrefUtils;
 import com.emrekose.weatherapp.utils.WeatherCalc;
 import com.emrekose.weatherapp.utils.WeatherUtils;
 
@@ -45,26 +47,33 @@ public class WeatherOneFragment extends Fragment {
         tempFragmentTextView1 = (TextView)view.findViewById(R.id.tempFragmentTextView1);
         tempFragmentTextView2 = (TextView)view.findViewById(R.id.tempFragmentTextView2);
 
+        Font.change(getContext(),tempFragmentTextView1,Font.OPEN_SANS_COND_BOLD_PATH);
+        Font.change(getContext(),tempFragmentTextView2,Font.OPEN_SANS_COND_BOLD_PATH);
+
         dayOneTextView = (TextView)view.findViewById(R.id.dayOneTextView);
         dayTwoTextView = (TextView)view.findViewById(R.id.dayTwoTextView);
+
+        Font.change(getContext(),dayOneTextView,Font.OPEN_SANS_COND_BOLD_PATH);
+        Font.change(getContext(),dayTwoTextView,Font.OPEN_SANS_COND_BOLD_PATH);
+
 
         fragment1ImageView = (ImageView)view.findViewById(R.id.fragment1ImageView);
         fragment2ImageView = (ImageView)view.findViewById(R.id.fragment2ImageView);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call <ForecastResponse> forecastResponseCall = apiService.getFiveDaysDatas("eskisehir", Constants.API_KEY);
+        Call <ForecastResponse> forecastResponseCall = apiService.getFiveDaysDatas(SharedPrefUtils.getCityName(getContext()), Constants.API_KEY);
         forecastResponseCall.enqueue(new Callback<ForecastResponse>() {
             @Override
             public void onResponse(Call<ForecastResponse> call, Response<ForecastResponse> response) {
-                tempFragmentTextView1.setText(WeatherCalc.kelvinToCelcius(response.body().getLists().get(9).getForecastMain().getTemp()));
-                dayOneTextView.setText(DateUtils.getDayName(response.body().getLists().get(9).getDtTxt()));
+                tempFragmentTextView1.setText(WeatherCalc.kelvinToCelcius(response.body().getLists().get(8).getForecastMain().getTemp()));
+                dayOneTextView.setText(DateUtils.getDayName(response.body().getLists().get(8).getDtTxt()));
 
-                tempFragmentTextView2.setText(WeatherCalc.kelvinToCelcius(response.body().getLists().get(17).getForecastMain().getTemp()));
-                dayTwoTextView.setText(DateUtils.getDayName(response.body().getLists().get(17).getDtTxt()));
+                tempFragmentTextView2.setText(WeatherCalc.kelvinToCelcius(response.body().getLists().get(16).getForecastMain().getTemp()));
+                dayTwoTextView.setText(DateUtils.getDayName(response.body().getLists().get(16).getDtTxt()));
 
-                WeatherUtils.setFragmentWeatherIcon(fragment1ImageView,response.body().getLists().get(9).getForecastWeatherList().get(0).getIcon());
-                WeatherUtils.setFragmentWeatherIcon(fragment2ImageView,response.body().getLists().get(17).getForecastWeatherList().get(0).getIcon());
+                WeatherUtils.setFragmentWeatherIcon(fragment1ImageView,response.body().getLists().get(8).getForecastWeatherList().get(0).getIcon());
+                WeatherUtils.setFragmentWeatherIcon(fragment2ImageView,response.body().getLists().get(16).getForecastWeatherList().get(0).getIcon());
             }
 
             @Override

@@ -25,6 +25,7 @@
 
             <TextView
                 android:id="@+id/cityTextView"
+                style="@style/TextViewStroke"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed"
@@ -36,6 +37,7 @@
 
             <TextView
                 android:id="@+id/countryTextView"
+                style="@style/TextViewStroke"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="USA"
@@ -55,6 +57,7 @@
 
             <TextView
                 android:id="@+id/timeTextView"
+                style="@style/TextViewStroke"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
@@ -65,9 +68,14 @@
 
             <TextView
                 android:id="@+id/dateTextView"
+                style="@style/TextViewStroke"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
+                android:shadowColor="#000"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"
                 android:text="13 August"
                 android:textColor="@android:color/white"
                 android:textSize="25dp"
@@ -234,18 +242,8 @@
         fab:fab_addButtonColorNormal="@color/colorPrimaryDark"
         fab:fab_addButtonSize="normal"
         fab:fab_expandDirection="down"
-        fab:fab_icon="@drawable/settings"
         fab:fab_labelStyle="@style/menu_labels_style"
         fab:fab_labelsPosition="left">
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabRefresh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/colorPrimaryDark"
-            fab:fab_icon="@drawable/ic_refresh_white_24dp"
-            fab:fab_size="mini"
-            fab:fab_title="Yenile" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabGetGpsDatas"
@@ -264,6 +262,15 @@
             fab:fab_icon="@drawable/ic_location_on_white_24dp"
             fab:fab_size="mini"
             fab:fab_title="Lokasyonu Değiştir" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/colorPrimaryDark"
+            fab:fab_icon="@drawable/ic_refresh_white_24dp"
+            fab:fab_size="mini"
+            fab:fab_title="Yenile" />
 
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

@@ -1,5 +1,6 @@
 package com.emrekose.weatherapp.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    private ApiInterface apiService;
+
     private final int SHOW_CITIES_ACTIVITY = 1;
 
     private static String currentCityName;
@@ -61,9 +64,35 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        apiService = ApiClient.getClient().create(ApiInterface.class);
 
+        getData();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(!SharedPrefUtils.getCityName(MainActivity.this).isEmpty()){
+            this.finish();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (resultCode){
+            case RESULT_OK :
+                currentCityName = data.getStringExtra("cityname");
+                break;
+            case RESULT_CANCELED :
+                Toast.makeText(MainActivity.this, "Lokasyon değiştirilmedi.", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+    private void getData(){
         Call <WeatherResponse> call = apiService.getCurrentDatas(SharedPrefUtils.getCityName(MainActivity.this),Constants.API_KEY);
         call.enqueue(new Callback<WeatherResponse>() {
             @Override
@@ -90,29 +119,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, "onFailure: " + t.toString() );
             }
         });
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if(!SharedPrefUtils.getCityName(MainActivity.this).isEmpty()){
-            this.finish();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (resultCode){
-            case RESULT_OK :
-                currentCityName = data.getStringExtra("cityname");
-                break;
-            case RESULT_CANCELED :
-                Toast.makeText(MainActivity.this, "Lokasyon değiştirilmedi.", Toast.LENGTH_SHORT).show();
-                break;
-        }
     }
 
     private void initialize(){
@@ -155,13 +161,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        fabRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getData();
+            }
+        });
+
         // all of textView is font changing
         Font.change(MainActivity.this,cityTexView, Font.OPEN_SANS_COND_BOLD_PATH);
         Font.change(MainActivity.this,countryTextView,Font.OPEN_SANS_COND_LIGHT_PATH);
         Font.change(MainActivity.this,weatherDescriptionTexView,Font.OPEN_SANS_COND_BOLD_PATH);
         Font.change(MainActivity.this,degreeTextView,Font.OPEN_SANS_COND_LIGHT_PATH);
-        Font.change(MainActivity.this,timeTextView,Font.OPEN_SANS_COND_LIGHT_ITALIC_PATH);
-        Font.change(MainActivity.this,dateTextView,Font.OPEN_SANS_COND_LIGHT_ITALIC_PATH);
+        Font.change(MainActivity.this,timeTextView,Font.OPEN_SANS_COND_BOLD_PATH);
+        Font.change(MainActivity.this,dateTextView,Font.OPEN_SANS_COND_BOLD_PATH);
         Font.change(MainActivity.this,maxMinTemperatureTexView,Font.OPEN_SANS_COND_LIGHT_PATH);
         Font.change(MainActivity.this,humidityTextView,Font.OPEN_SANS_COND_LIGHT_PATH);
         Font.change(MainActivity.this,windTextView,Font.OPEN_SANS_COND_LIGHT_PATH);

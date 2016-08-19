@@ -18,7 +18,7 @@ public class DateUtils {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        SimpleDateFormat outFormat = new SimpleDateFormat("EEEE");
+        SimpleDateFormat outFormat = new SimpleDateFormat("EEE");
         return outFormat.format(date);
     }
 }
