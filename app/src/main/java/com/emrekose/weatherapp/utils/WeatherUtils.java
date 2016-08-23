@@ -75,5 +75,21 @@ public class WeatherUtils {
 
     }
 
+    public static String getWeatherCondition(String condition){
+
+        String condition_tr = "";
+
+        switch (condition){
+            case "Thunderstorm" : condition_tr = "Sağanak"; break;
+            case "Drizzle" : condition_tr = "Yağmur Geçişleri"; break;
+            case "Rain" : condition_tr = "Yağmur"; break;
+            case "Snow" : condition_tr = "Kar"; break;
+            case "Clear" : condition_tr = "Açık"; break;
+            case "Clouds" : condition_tr = "Bulutlu"; break;
+        }
+
+        return condition_tr;
+    }
+
     
 }

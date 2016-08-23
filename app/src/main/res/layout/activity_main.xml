@@ -30,19 +30,10 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed"
                 android:paddingRight="10dp"
-                android:text="Los Angeles,"
+                android:text="Los Angeles"
                 android:textColor="@android:color/white"
                 android:textSize="40dp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/countryTextView"
-                style="@style/TextViewStroke"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="USA"
-                android:textColor="@android:color/white"
-                android:textSize="40dp" />
 
         </LinearLayout>
 

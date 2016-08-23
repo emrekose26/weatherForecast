@@ -1,6 +1,5 @@
 package com.emrekose.weatherapp.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static String currentCityName;
 
-    private TextView cityTexView, countryTextView, degreeTextView, weatherDescriptionTexView,
+    private TextView cityTexView, degreeTextView, weatherDescriptionTexView,
     timeTextView, dateTextView, maxMinTemperatureTexView, humidityTextView, windTextView;
 
     private ImageView weatherIconImageView;
@@ -98,9 +97,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
                 cityTexView.setText(response.body().getName());
-                countryTextView.setText(response.body().getSys().getCountry());
                 degreeTextView.setText(WeatherCalc.kelvinToCelcius(response.body().getMainModel().getTemp()));
-                weatherDescriptionTexView.setText(response.body().getWeatherList().get(0).getMain());
+                weatherDescriptionTexView.setText(WeatherUtils.getWeatherCondition(response.body().getWeatherList().get(0).getMain()));
                 humidityTextView.setText(" % " + String.valueOf(response.body().getMainModel().getHumidity()));
                 windTextView.setText(String.valueOf(Math.floor(response.body().getWind().getDeg())) + " m/s");
                 maxMinTemperatureTexView.setText(WeatherCalc.kelvinToCelcius(response.body().getMainModel().getTempMax()) + " / " + WeatherCalc.kelvinToCelcius(response.body().getMainModel().getTempMin()));
@@ -125,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
 
         // TextView initializing
         cityTexView = (TextView)findViewById(R.id.cityTextView);
-        countryTextView = (TextView)findViewById(R.id.countryTextView);
         degreeTextView = (TextView)findViewById(R.id.degreeTextView);
         weatherDescriptionTexView = (TextView)findViewById(R.id.weatherDescTextView);
         timeTextView = (TextView)findViewById(R.id.timeTextView);
@@ -170,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
 
         // all of textView is font changing
         Font.change(MainActivity.this,cityTexView, Font.OPEN_SANS_COND_BOLD_PATH);
-        Font.change(MainActivity.this,countryTextView,Font.OPEN_SANS_COND_LIGHT_PATH);
         Font.change(MainActivity.this,weatherDescriptionTexView,Font.OPEN_SANS_COND_BOLD_PATH);
         Font.change(MainActivity.this,degreeTextView,Font.OPEN_SANS_COND_LIGHT_PATH);
         Font.change(MainActivity.this,timeTextView,Font.OPEN_SANS_COND_BOLD_PATH);
